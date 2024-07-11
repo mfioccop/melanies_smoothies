@@ -11,7 +11,7 @@ st.write('Name will be', name)
 
 cnx = st.connection("snowflake")
 session = cnx.session()
-my_df = session.table('smoothies.public.fruit_options').select(col('FRUIT_NAME'))
+my_df = session.table('smoothies.public.fruit_options').select(col('FRUIT_NAME'), col('SEARCH_ON'))
 pd_df = my_df.to_pandas()
 st.dataframe(pd_df)
 ings = st.multiselect('Choose up to 5', my_df, max_selections=5)
