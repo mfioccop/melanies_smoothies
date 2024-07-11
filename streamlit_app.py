@@ -27,3 +27,4 @@ if ings:
 import requests
 fv_resp = requests.get('https://fruityvice.com/api/fruit/watermelon')
 st.text(fv_resp.json())
+fv_df = st.dataframe(data=fv_resp.json(), use_container_width=True)
