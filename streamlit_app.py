@@ -26,4 +26,4 @@ if ings:
 
 import requests
 fv_resp = requests.get('https://fruityvice.com/api/fruit/watermelon')
-st.text(fv_resp)
+st.text(fv_resp.json())
