@@ -19,7 +19,8 @@ if ings:
     ingst = ''
     for fc in ings:
         ingst += fc + ' '
-        fv_resp = requests.get(f'https://fruityvice.com/api/fruit/{fc}')
+        st.subheader(fc + ' Nutrition Information')
+        fv_resp = requests.get('https://fruityvice.com/api/fruit/' + fc)
         fv_df = st.dataframe(data=fv_resp.json(), use_container_width=True)
 
     myins = "insert into smoothies.public.orders(ingredients, name_on_order) values('" + ingst + "', '" + name + "')"
