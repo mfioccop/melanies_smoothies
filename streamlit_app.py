@@ -1,6 +1,7 @@
 import streamlit as st
 # from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
+import requests
 
 st.title("Customize your smoothie")
 st.write("Choose the fruits")
@@ -18,13 +19,11 @@ if ings:
     ingst = ''
     for fc in ings:
         ingst += fc + ' '
+        fv_resp = requests.get('https://fruityvice.com/api/fruit/watermelon')
+        fv_df = st.dataframe(data=fv_resp.json(), use_container_width=True)
+
     myins = "insert into smoothies.public.orders(ingredients, name_on_order) values('" + ingst + "', '" + name + "')"
     submit = st.button('Submit order')
     if submit:
         session.sql(myins).collect()
         st.success('Smoothie is ordered! ' + name, icon="✔")
-
-import requests
-fv_resp = requests.get('https://fruityvice.com/api/fruit/watermelon')
-st.text(fv_resp.json())
-fv_df = st.dataframe(data=fv_resp.json(), use_container_width=True)
