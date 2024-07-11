@@ -23,3 +23,7 @@ if ings:
     if submit:
         session.sql(myins).collect()
         st.success('Smoothie is ordered! ' + name, icon="✔")
+
+import requests
+fv_resp = requests.get('https://fruityvice.com/api/fruit/watermelon')
+st.text(fv_resp)
